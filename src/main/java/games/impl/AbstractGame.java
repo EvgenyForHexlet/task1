@@ -6,7 +6,7 @@ import io.IOManager;
 
 public abstract class AbstractGame<T> implements Game {
 
-    protected final SharedMemory sharedMemory = SharedMemory.getSharedMemory();;
+    protected final SharedMemory sharedMemory = SharedMemory.getSharedMemory();
     protected final IOManager ioManager = IOManager.getIOManager();
 
     protected Integer askForAnswer() {
@@ -23,7 +23,6 @@ public abstract class AbstractGame<T> implements Game {
             ioManager.printLine("Correct!");
             return true;
         }
-        ioManager.printLine(sharedMemory.sayLetsPlayAgain());
         ioManager.printLine(userAnswer + " is wrong answer ;(. Correct answer was " + rightAnswer);
         return false;
 

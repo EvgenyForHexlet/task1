@@ -4,6 +4,7 @@ import games.common.SharedMemory;
 import games.errors.Error;
 import games.impl.CalculatorGame;
 import games.impl.EvenGame;
+import games.impl.Exit;
 import games.impl.GCDGame;
 import games.impl.GreetGame;
 import games.impl.PrimeGame;
@@ -13,8 +14,7 @@ import io.IOManager;
 
 public class Start {
 
-    private IOManager ioManager;
-    private SharedMemory sharedMemory;
+    private final IOManager ioManager;
     private static Game[] games;
     private final Game GREET = new GreetGame();
     private final Game EXIT = new Exit();
@@ -22,8 +22,7 @@ public class Start {
 
     public Start() {
         ioManager = IOManager.getIOManager();
-        sharedMemory = SharedMemory.getSharedMemory();
-        sharedMemory.setTries(3);
+        SharedMemory.getSharedMemory().setTries(3);
         games = new Game[7];
         games[0] = GREET;
         games[1] = new CalculatorGame();
@@ -63,8 +62,8 @@ public class Start {
     private Game findGameByNumber(Integer number) {
 
         if(number != null) {
-            for (int i = 0; i < games.length; i++) {
-                if (games[i].getGameNumber() == number) return games[i];
+            for (Game game : games) {
+                if (game.getGameNumber() == number) return game;
             }
         }
         return ERROR;
